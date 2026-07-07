@@ -3,372 +3,367 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>THANAPUN.C | Portfolio</title>
+<title>Thanapun C. | Professional Portfolio</title>
 <style>
-  :root{
-    --glass-fill: rgba(255,255,255,0.10);
-    --glass-fill-strong: rgba(255,255,255,0.16);
-    --glass-rim: rgba(255,255,255,0.55);
-    --glass-rim-dim: rgba(255,255,255,0.14);
-    --ink: #f5f5f7;
-    --ink-dim: #b8b9c2;
-    --accent: #0a84ff;
-    --accent-2: #bf5af2;
-    --radius: 28px;
-  }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", sans-serif;
-    color:var(--ink);
-    min-height:100vh;
-    overflow-x:hidden;
-    background: #0b0c18;
+  :root {
+    --bg-dark: #060713;
+    --panel-bg: rgba(255, 255, 255, 0.03);
+    --panel-border: rgba(255, 255, 255, 0.08);
+    --accent-cyan: #00f2fe;
+    --accent-blue: #4facfe;
+    --text-main: #ffffff;
+    --text-muted: #8e92b2;
+    --radius-lg: 24px;
+    --radius-md: 14px;
   }
 
-  /* ---------- Background ---------- */
-  .bg{
-    position:fixed; inset:0; z-index:-2;
-    background:
-      radial-gradient(circle at 20% 20%, #3a2e8c 0%, transparent 45%),
-      radial-gradient(circle at 80% 15%, #0a5cff 0%, transparent 50%),
-      radial-gradient(circle at 50% 80%, #7c2ee0 0%, transparent 55%),
-      radial-gradient(circle at 85% 75%, #ff5aa8 0%, transparent 40%),
-      linear-gradient(160deg, #0b0c18 0%, #131234 60%, #0b0c18 100%);
-    background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200%, 100% 100%;
-    animation: drift 22s ease-in-out infinite alternate;
-  }
-  @keyframes drift{
-    0%{ background-position: 0% 0%, 100% 0%, 50% 100%, 100% 100%, 0 0; }
-    100%{ background-position: 20% 30%, 70% 20%, 40% 70%, 80% 60%, 0 0; }
-  }
-  .grain{
-    position:fixed; inset:0; z-index:-1; opacity:0.03; pointer-events:none;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', -apple-system, sans-serif; }
+  html { scroll-behavior: smooth; }
+  
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
   }
 
-  /* ---------- Glass base ---------- */
-  .glass{
-    position:relative;
-    background: var(--glass-fill);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    backdrop-filter: blur(24px) saturate(160%);
-    border-radius: var(--radius);
-    border: 1px solid var(--glass-rim-dim);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 0 40px rgba(255,255,255,0.03);
-    transition: transform .35s ease, box-shadow .35s ease, background .35s ease;
+  /* Ambient Background Effects */
+  .bg-glow {
+    position: fixed;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0,242,254,0.08) 0%, transparent 70%);
+    top: -10%; right: -10%; z-index: -1; pointer-events: none;
   }
-  .glass::before{
-    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-    background: linear-gradient(135deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 30%);
-    mix-blend-mode: overlay;
+  .bg-glow-2 {
+    position: fixed;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(79,172,254,0.05) 0%, transparent 70%);
+    bottom: -10%; left: -10%; z-index: -1; pointer-events: none;
   }
-  .glass:hover{
-    background: var(--glass-fill-strong); transform: translateY(-3px);
-    box-shadow: 0 14px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.45);
+  .cyber-grid {
+    position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+    background-size: 50px 50px; z-index: -1; pointer-events: none;
+    mask-image: radial-gradient(circle at center, black, transparent 90%);
+    -webkit-mask-image: radial-gradient(circle at center, black, transparent 90%);
   }
 
-  /* ---------- Nav ---------- */
-  nav.glass{
-    position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:100;
-    display:flex; align-items:center; gap:28px; padding:12px 26px; border-radius:999px;
-    width:max-content; max-width:92vw;
+  /* Navigation Bar */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(6, 7, 19, 0.7);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--panel-border);
+    padding: 18px 6vw; display: flex; justify-content: space-between; align-items: center;
   }
-  nav .logo{ font-weight:700; letter-spacing:0.5px; font-size:15px; white-space:nowrap;}
-  nav ul{ list-style:none; display:flex; gap:22px; }
-  nav a{ color:var(--ink-dim); text-decoration:none; font-size:14px; font-weight:500; transition:color .2s;}
-  nav a:hover{ color:var(--ink); }
+  nav .logo { font-weight: 800; font-size: 18px; letter-spacing: -0.5px; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;}
+  nav ul { list-style: none; display: flex; gap: 24px; }
+  nav a { color: var(--text-muted); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+  nav a:hover { color: var(--text-main); }
+  @media (max-width: 900px) { nav ul { display: none; } }
 
-  section{ padding: 140px 6vw 60px; max-width:1200px; margin:0 auto; }
-  .eyebrow{ font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--ink-dim); margin-bottom:10px; }
-  h2.title{ font-size:clamp(28px,4vw,42px); font-weight:700; margin-bottom:36px; }
-
-  /* ---------- Hero ---------- */
-  .hero{ padding-top:170px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:22px;}
-  .avatar{
-    width:132px; height:132px; border-radius:40px; display:flex; align-items:center; justify-content:center;
-    font-size:46px; font-weight:700; background: linear-gradient(145deg, rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+  /* Section Layouts */
+  section { padding: 120px 6vw 40px; max-width: 1200px; margin: 0 auto; }
+  .section-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-cyan); margin-bottom: 8px; }
+  .section-title { font-size: 32px; font-weight: 800; margin-bottom: 32px; letter-spacing: -0.5px; }
+  
+  .glass-panel {
+    background: var(--panel-bg);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius-lg);
+    padding: 40px;
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
   }
-  .hero h1{ font-size:clamp(38px,6vw,64px); font-weight:800; letter-spacing:-1px; }
-  .hero p.role{ color:var(--ink-dim); font-size:18px; max-width:600px; }
-  .btn-row{ display:flex; gap:14px; margin-top:8px; flex-wrap:wrap; justify-content:center; }
-  .btn{ padding:14px 28px; border-radius:999px; font-weight:600; font-size:14px; cursor:pointer; border:1px solid var(--glass-rim-dim); text-decoration:none; color:var(--ink); }
-  .btn.primary{ background: linear-gradient(135deg, var(--accent), var(--accent-2)); border:none; box-shadow:0 6px 24px rgba(10,132,255,0.4);}
-  .btn.ghost.glass{ background:var(--glass-fill); }
 
-  /* ---------- About / Education ---------- */
-  .grid-2{ display:grid; grid-template-columns:1.4fr 1fr; gap:24px; }
-  @media(max-width:800px){ .grid-2{ grid-template-columns:1fr; } }
-  .card{ padding:30px; }
-  .info-row{ display:grid; grid-template-columns: repeat(2, 1fr); gap:20px; margin-top:24px; }
-  @media(max-width:480px){ .info-row{ grid-template-columns: 1fr; } }
-  .info-row div span{ display:block; color:var(--ink-dim); font-size:12px; margin-bottom:4px;}
-  .edu-card{ padding:26px; height: 100%; display: flex; flex-direction: column; justify-content: center; }
-  .edu-card .period{ color:var(--accent); font-weight:700; font-size:14px; margin-bottom:8px; }
-  .edu-card .degree{ font-weight: 600; font-size: 16px; margin-bottom: 6px; }
-  .edu-card .major{ color: var(--ink-dim); font-size: 14px; line-height: 1.5; }
-
-  /* ---------- Skills ---------- */
-  .skill-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-  @media(max-width:900px){ .skill-grid{ grid-template-columns:repeat(2,1fr);} }
-  @media(max-width:600px){ .skill-grid{ grid-template-columns:1fr;} }
-  .skill-card{ padding:24px; text-align:left; display: flex; flex-direction: column; justify-content: space-between; }
-  .skill-header{ display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
-  .skill-icon{
-    width:42px; height:42px; border-radius:12px; flex-shrink: 0; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700;
-    background:linear-gradient(145deg, rgba(255,255,255,0.3), rgba(255,255,255,0.05));
+  /* 1. หน้าปก (Cover) */
+  .cover-hero { padding-top: 180px; display: grid; grid-template-columns: 1.2fr 1.8fr; gap: 60px; align-items: center; }
+  .profile-frame { position: relative; justify-self: center; }
+  .image-wrapper { width: 260px; height: 260px; border-radius: 50%; overflow: hidden; border: 4px solid var(--panel-border); background: #11142a; }
+  .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+  .status-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 242, 254, 0.06); border: 1px solid rgba(0, 242, 254, 0.15); color: var(--accent-cyan); padding: 6px 14px; border-radius: 99px; font-size: 12px; font-weight: 600; margin-bottom: 16px; }
+  .status-dot { width: 6px; height: 6px; background: var(--accent-cyan); border-radius: 50%; box-shadow: 0 0 8px var(--accent-cyan); }
+  .cover-info h1 { font-size: clamp(36px, 5vw, 54px); font-weight: 800; line-height: 1.1; margin-bottom: 8px; }
+  .cover-info .subtitle { font-size: clamp(18px, 2.5vw, 24px); font-weight: 600; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+  .quick-contact-row { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 12px; color: var(--text-muted); font-size: 14px; }
+  .quick-contact-row span strong { color: var(--text-main); }
+  @media (max-width: 768px) {
+    .cover-hero { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+    .quick-contact-row { justify-content: center; }
   }
-  .skill-name{ font-weight:700; font-size: 16px; }
-  .skill-desc{ font-size: 13px; color: var(--ink-dim); line-height: 1.5; margin-bottom: 14px; }
-  .badge{ align-self: flex-start; font-size:11px; padding:4px 12px; border-radius:999px; font-weight:700; }
-  .badge.core{ background:rgba(52,199,89,0.25); color:#8CF0A8; }
-  .badge.sub{ background:rgba(10,132,255,0.25); color:#8FCBFF; }
 
-  .soft-skills-container{ margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; }
-  .soft-tag{ font-size: 13px; padding: 8px 16px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: var(--ink); }
+  /* 2. ประวัติส่วนตัวและช่องทางการติดต่อ (About & Contact) */
+  .about-grid { display: grid; grid-template-columns: 1.8fr 1.2fr; gap: 30px; }
+  .summary-text { font-size: 16px; line-height: 1.8; color: var(--text-muted); }
+  .contact-list { display: flex; flex-direction: column; gap: 16px; }
+  .contact-item { display: flex; align-items: center; gap: 14px; background: rgba(255,255,255,0.02); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--panel-border); text-decoration: none; color: inherit; transition: border-color 0.2s; }
+  .contact-item:hover { border-color: var(--accent-cyan); }
+  .contact-icon { font-size: 20px; color: var(--accent-cyan); }
+  .contact-details span { display: block; font-size: 11px; color: var(--text-muted); }
+  .contact-details p { font-size: 14px; font-weight: 600; }
+  @media (max-width: 850px) { .about-grid { grid-template-columns: 1fr; } }
 
-  /* ---------- Projects ---------- */
-  .proj-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
-  @media(max-width:900px){ .proj-grid{ grid-template-columns:1fr; } }
-  .proj-card{ overflow:hidden; padding:0; display:flex; flex-direction:column; }
-  .proj-thumb{ height:150px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding: 20px;
-    background:linear-gradient(160deg, rgba(10,132,255,0.15), rgba(191,90,242,0.05)); }
-  .proj-thumb .main-t{ font-weight: 800; font-size: 16px; letter-spacing: 0.5px; margin-bottom: 4px;}
-  .proj-thumb .sub-t{ font-size: 12px; color: var(--ink-dim); }
-  .proj-body{ padding:22px; flex:1; display:flex; flex-direction:column; gap:12px; }
-  .proj-tags{ display:flex; gap:6px; flex-wrap:wrap; }
-  .tag{ font-size:11px; padding:4px 10px; border-radius:999px; background:var(--glass-fill); border:1px solid var(--glass-rim-dim); color:var(--ink-dim); }
-  .proj-body h3{ font-size:17px; font-weight: 700; }
-  .proj-body p{ font-size:13.5px; color:var(--ink-dim); line-height:1.6; }
-  .proj-cta{ margin-top:auto; text-align:center; padding:12px; font-size:13px; font-weight:600; border-top:1px solid var(--glass-rim-dim); cursor:pointer;}
+  /* 3. ประวัติการศึกษา (Education) */
+  .edu-card { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
+  .edu-main h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+  .edu-sub { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
+  .edu-gpa { background: rgba(79, 172, 254, 0.1); border: 1px solid rgba(79, 172, 254, 0.2); padding: 12px 20px; border-radius: var(--radius-md); text-align: center; }
+  .edu-gpa span { display: block; font-size: 10px; color: var(--accent-blue); font-weight: 700; text-transform: uppercase; }
+  .edu-gpa p { font-size: 22px; font-weight: 800; color: var(--text-main); }
+  @media (max-width: 600px) { .edu-card { flex-direction: column; } .edu-gpa { width: 100%; } }
 
-  /* ---------- Contact ---------- */
-  .contact-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
-  @media(max-width:1024px){ .contact-grid{ grid-template-columns:repeat(2,1fr); } }
-  @media(max-width:520px){ .contact-grid{ grid-template-columns:1fr; } }
-  .contact-card{ padding:24px; text-align:center; text-decoration: none; color: inherit; }
-  .contact-icon{ font-size:26px; margin-bottom:10px; color: var(--accent); }
-  .contact-card .label{ font-weight:700; font-size:14px; margin-bottom:6px; }
-  .contact-card .value{ color:var(--ink-dim); font-size:13px; word-break:break-all; }
+  /* 4. ทักษะความสามารถ (Skills) */
+  .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .skills-column h3 { font-size: 18px; font-weight: 700; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid var(--panel-border); }
+  .skill-group-items { display: flex; flex-wrap: wrap; gap: 10px; }
+  .skill-tag { background: rgba(255,255,255,0.04); border: 1px solid var(--panel-border); padding: 10px 18px; border-radius: 99px; font-size: 13px; font-weight: 500; }
+  .skill-tag.highlight { border-color: rgba(0, 242, 254, 0.3); background: rgba(0, 242, 254, 0.02); }
+  @media (max-width: 768px) { .skills-grid { grid-template-columns: 1fr; } }
 
-  footer{ text-align:center; padding:50px 0 30px; color:var(--ink-dim); font-size:13px; }
+  /* 5. ประสบการณ์การฝึกงานและกิจกรรม (Experience & Activities) */
+  .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+  .exp-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 20px; color: var(--accent-blue); }
+  .timeline-item { position: relative; padding-left: 24px; border-left: 2px solid var(--panel-border); margin-bottom: 24px; }
+  .timeline-item::before { content: ''; position: absolute; left: -6px; top: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-blue); }
+  .time-period { font-size: 12px; color: var(--text-muted); font-weight: 600; margin-bottom: 4px; }
+  .exp-title { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .exp-desc { font-size: 13.5px; color: var(--text-muted); line-height: 1.6; }
+  @media (max-width: 850px) { .exp-grid { grid-template-columns: 1fr; } }
+
+  /* 6. ผลงานที่โดดเด่น (Highlight Projects) */
+  .projects-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+  .project-card { display: flex; flex-direction: column; height: 100%; padding: 0; overflow: hidden; }
+  .project-img-placeholder { height: 160px; background: linear-gradient(135deg, rgba(0,242,254,0.1), rgba(79,172,254,0.05)); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; color: var(--accent-cyan); border-bottom: 1px solid var(--panel-border); }
+  .project-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+  .project-role { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 6px; letter-spacing: 0.5px; }
+  .project-body h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+  .project-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+  .project-outcome { margin-top: auto; background: rgba(255,255,255,0.02); border: 1px solid var(--panel-border); padding: 12px; border-radius: var(--radius-md); font-size: 12.5px; }
+  .project-outcome strong { color: var(--accent-cyan); }
+
+  /* 7. เกียรติบัตรและใบรับรอง (Certificates) */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .cert-card { display: flex; gap: 16px; align-items: center; padding: 20px; background: rgba(255,255,255,0.01); }
+  .cert-icon { font-size: 28px; color: var(--accent-cyan); filter: drop-shadow(0 0 8px rgba(0,242,254,0.3)); }
+  .cert-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .cert-info p { font-size: 12px; color: var(--text-muted); }
+
+  footer { text-align: center; padding: 60px 0 30px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--panel-border); margin-top: 8px; }
 </style>
 </head>
 <body>
 
-<div class="bg"></div>
-<div class="grain"></div>
+<div class="bg-glow"></div>
+<div class="bg-glow-2"></div>
+<div class="cyber-grid"></div>
 
-<nav class="glass">
+<nav>
   <div class="logo">&lt;THANAPUN.C /&gt;</div>
   <ul>
-    <li><a href="#about">เกี่ยวกับฉัน</a></li>
+    <li><a href="#cover">หน้าแรก</a></li>
+    <li><a href="#about">ประวัติส่วนตัว</a></li>
+    <li><a href="#education">การศึกษา</a></li>
     <li><a href="#skills">ทักษะ</a></li>
-    <li><a href="#projects">ผลงาน</a></li>
-    <li><a href="#contact">ติดต่อ</a></li>
+    <li><a href="#experience">ประสบการณ์</a></li>
+    <li><a href="#projects">ผลงานเด่น</a></li>
+    <li><a href="#certificates">เกียรติบัตร</a></li>
   </ul>
 </nav>
 
-<section class="hero">
-  <div class="avatar glass">T</div>
-  <h1>Thanapun Chomjun</h1>
-  <p class="role">นักพัฒนาระบบ Embedded และ IoT | นักศึกษาภาควิชาวิศวกรรมคอมพิวเตอร์</p>
-  <div class="btn-row">
-    <a href="#contact" class="btn primary">ติดต่อร่วมงาน</a>
-    <a href="#projects" class="btn ghost glass">ดูผลงานทั้งหมด</a>
+<section id="cover" class="cover-hero">
+  <div class="profile-frame">
+    <div class="image-wrapper">
+      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500" alt="Thanapun Chomjun">
+    </div>
+  </div>
+  <div class="cover-info">
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      <span>OPEN FOR OPPORTUNITIES</span>
+    </div>
+    <h1>Thanapun Chomjun</h1>
+    <div class="subtitle">Embedded System & IoT Developer</div>
+    <div class="quick-contact-row">
+      <span>📞 <strong>Phone:</strong> 080-500-6334</span>
+      <span>✉️ <strong>Email:</strong> thanapun776@gmail.com</span>
+    </div>
   </div>
 </section>
 
 <section id="about">
-  <div class="eyebrow">Summary</div>
-  <h2 class="title">เกี่ยวกับฉัน</h2>
-  <div class="grid-2">
-    <div class="card glass">
-      <p style="line-height:1.8; color:var(--ink-dim); font-size: 15px;">
-        นักพัฒนาระบบ Embedded และ IoT ที่มีประสบการณ์จริงในการใช้งาน ESP32 และการเชื่อมต่อเซ็นเซอร์ มีทักษะที่โดดเด่นด้านการเขียน Firmware ด้วยภาษา C++ การต่อวงจรฮาร์ดแวร์ การจัดการสถาปัตยกรรมเน็ตเวิร์ก และการออกแบบระบบ IoT แบบครบวงจร (End-to-End IoT System Design)
+  <div class="section-eyebrow">01 / Profile</div>
+  <h2 class="section-title">ประวัติส่วนตัว & ช่องทางติดต่อ</h2>
+  <div class="about-grid">
+    <div class="glass-panel">
+      <p class="summary-text">
+        นักศึกษาภาควิชาวิศวกรรมคอมพิวเตอร์ มีความมุ่งมั่นและหลงใหลในการพัฒนาระบบ Embedded Systems และ Internet of Things (IoT) มีความเชี่ยวชาญในการเขียน Firmware ควบคุมไมโครคอนโทรลเลอร์และการต่อวงจรฮาร์ดแวร์เพื่ออ่านค่าจากเซ็นเซอร์ พร้อมความสามารถในการเชื่อมต่อและสตรีมข้อมูลโทรมาตรขึ้นระบบคลาวด์ มีความกระตือรือร้นในการเรียนรู้เทคโนโลยีใหม่ๆ และพร้อมที่จะทำงานร่วมกับผู้อื่นเพื่อแก้ไขปัญหาที่ท้าทายในอุตสาหกรรม
       </p>
-      <div class="info-row">
-        <div><span>ชื่อ-นามสกุล</span>Thanapun Chomjun</div>
-        <div><span>ชื่อเล่น</span>Godji (ก็อตจิ)</div>
-        <div><span>ตำแหน่งที่เชี่ยวชาญ</span>IoT / Embedded Developer</div>
-        <div><span>ทักษะหลัก</span>Firmware (C++), HW & Wiring</div>
-      </div>
     </div>
-    <div>
-      <div class="edu-card glass">
-        <div class="period">2022 – Present</div>
-        <div class="degree">Pibulsongkram Rajabhat University</div>
-        <div class="major">Bachelor of Engineering in Computer Engineering<br><span style="color: var(--accent-2); font-weight: 600;">Concentration in Robot Automation</span></div>
-      </div>
+    <div class="contact-list">
+      <a href="tel:0805006334" class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-details"><span>เบอร์โทรศัพท์</span><p>080-500-6334</p></div>
+      </a>
+      <a href="mailto:thanapun776@gmail.com" class="contact-item">
+        <div class="contact-icon">✉️</div>
+        <div class="contact-details"><span>อีเมลติดต่อ</span><p>thanapun776@gmail.com</p></div>
+      </a>
+      <a href="https://github.com/godji-jy" target="_blank" class="contact-item">
+        <div class="contact-icon">🐙</div>
+        <div class="contact-details"><span>เว็บไซต์ผลงานเก็บบันทึกโค้ด</span><p>github.com/godji-jy</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-eyebrow">02 / Academy</div>
+  <h2 class="section-title">ประวัติการศึกษา</h2>
+  <div class="glass-panel edu-card">
+    <div class="edu-main">
+      <h3>มหาวิทยาลัยราชภัฏพิบูลสงคราม</h3>
+      <p class="edu-sub" style="color: var(--accent-cyan); font-weight:600;">คณะเทคโนโลยีอุตสาหกรรม | สาขาวิชาวิศวกรรมคอมพิวเตอร์</p>
+      <p class="edu-sub">เน้นศึกษาทางด้าน: หุ่นยนต์และระบบอัตโนมัติ (Robot Automation)</p>
+      <p class="edu-sub" style="margin-top: 8px;">🕒 ปีที่ศึกษา: 2022 - ปัจจุบัน</p>
+    </div>
+    <div class="edu-gpa">
+      <span>GPAX ทั้งหมด</span>
+      <p>3.XX</p>
     </div>
   </div>
 </section>
 
 <section id="skills">
-  <div class="eyebrow">Hard Skills</div>
-  <h2 class="title">ทักษะความสามารถทางเทคนิค</h2>
-  <div class="skill-grid">
-    <div class="skill-card glass">
-      <div>
-        <div class="skill-header">
-          <div class="skill-icon"> MCU </div>
-          <div class="skill-name">ESP32 / Arduino</div>
-        </div>
-        <div class="skill-desc">เขียน Firmware ภาษา C++, จัดการระบบ Interrupt, พัฒนาและเรียกใช้งาน Sensor Library ได้อย่างมีประสิทธิภาพ</div>
+  <div class="section-eyebrow">03 / Capabilities</div>
+  <h2 class="section-title">ทักษะความสามารถ</h2>
+  <div class="skills-grid">
+    <div class="glass-panel skills-column">
+      <h3>Hard Skills (ทักษะเฉพาะทาง)</h3>
+      <div class="skill-group-items">
+        <span class="skill-tag highlight">Firmware Development (C++)</span>
+        <span class="skill-tag highlight">ESP32 / Arduino MCU</span>
+        <span class="skill-tag">Hardware Circuit & Wiring</span>
+        <span class="skill-tag">I2C, OneWire, UART Protocols</span>
+        <span class="skill-tag">Firebase Realtime DB / Auth</span>
+        <span class="skill-tag">Digital Modulation / Line Coding</span>
+        <span class="skill-tag">SCADA & IIOOT Architecture</span>
       </div>
-      <span class="badge core">Core Skill</span>
     </div>
+    <div class="glass-panel skills-column">
+      <h3>Soft Skills (ทักษะทางสังคม)</h3>
+      <div class="skill-group-items">
+        <span class="skill-tag">การทำงานร่วมกับผู้อื่น (Teamwork)</span>
+        <span class="skill-tag">การบริหารเวลาและการลำดับงาน (Time Management)</span>
+        <span class="skill-tag">การแก้ไขปัญหาเฉพาะหน้า (Problem Solving)</span>
+        <span class="skill-tag">การรับฟังและเข้าอกเข้าใจผู้อื่น (Empathy)</span>
+        <span class="skill-tag">การเรียนรู้อย่างต่อเนื่อง (Continuous Learning)</span>
+        <span class="skill-tag">การทำงานภายใต้แรงกดดันได้ดี</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-eyebrow">04 / Background</div>
+  <h2 class="section-title">ประสบการณ์ฝึกงาน & กิจกรรม</h2>
+  <div class="exp-grid">
+    <div class="glass-panel exp-box">
+      <h3>ประสบการณ์ฝึกงาน</h3>
+      <div class="timeline-item">
+        <div class="time-period">มิถุนายน - ตุลาคม (ปีที่เข้าฝึกงาน)</div>
+        <div class="exp-title">นักศึกษาฝึกงานตำแหน่ง Embedded & IoT Developer</div>
+        <div class="exp-desc">ได้รับมอบหมายให้ศึกษา ออกแบบ และทดลองต่อวงจรระบบอ่านค่าเซ็นเซอร์ พร้อมเขียนโปรแกรมควบคุมไมโครคอนโทรลเลอร์ประมวลผลข้อมูลส่งขึ้นเซิร์ฟเวอร์แบบ Real-time ได้เรียนรู้โครงสร้างการทำงานจริงร่วมกับวิศวกรในทีม</div>
+      </div>
+    </div>
+    <div class="glass-panel exp-box">
+      <h3>กิจกรรมใน / นอกมหาวิทยาลัย</h3>
+      <div class="timeline-item">
+        <div class="time-period">มกราคม 2026</div>
+        <div class="exp-title">การแข่งขันทักษะวิชาการและการเขียนโปรแกรม</div>
+        <div class="exp-desc">เข้าร่วมทีมเป็นผู้ออกแบบและวางโครงสร้าง Logic ฮาร์ดแวร์และวงจรสำหรับโปรเจกต์นวัตกรรมอัตโนมัติ พัฒนาทักษะการทำงานแข่งกับเวลาและการแก้ไขสถานการณ์เฉพาะหน้าอย่างเป็นระบบ</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time-period">พฤศจิกายน 2025</div>
+        <div class="exp-title">กิจกรรมค่ายอาสาสมัครและพัฒนานวัตกรรมชุมชน</div>
+        <div class="exp-desc">ทำหน้าที่เป็นทีมงานประสานงาน วางแผนระบบ คอนฟิกการทำงาน และช่วยเหลือเพื่อนร่วมทีมในการจัดทำโครงงานเทคโนโลยีและอุปกรณ์แจ้งเตือนอัจฉริยะ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-eyebrow">05 / Works</div>
+  <h2 class="section-title">ผลงานที่โดดเด่น (Highlight Projects)</h2>
+  <div class="projects-container">
     
-    <div class="skill-card glass">
-      <div>
-        <div class="skill-header">
-          <div class="skill-icon"> HW </div>
-          <div class="skill-name">Hardware & Wiring</div>
-        </div>
-        <div class="skill-desc">สื่อสารข้อมูลผ่านโปรโตคอล I2C, OneWire, การอ่านค่าสัญญาณ Analog (ADC) และการต่อวงจรเซ็นเซอร์ที่ถูกต้องแม่นยำ</div>
+    <div class="glass-panel project-card">
+      <div class="project-img-placeholder">IMAGE PLACEHOLDER (MOTOR SYSTEM)</div>
+      <div class="project-body">
+        <div class="project-role">บทบาท: Lead Hardware & Firmware Developer</div>
+        <h3>ระบบตรวจวัดสุขภาพมอเตอร์อัจฉริยะ</h3>
+        <p>ออกแบบกล่อง IoT ขนาดเล็กประมวลผลด้วย ESP32 เพื่อดึงค่าความสั่นสะเทือน อุณหภูมิ และความเร็วรอบ (RPM) ผ่านโปรโตคอล I2C และ OneWire ส่งขึ้นระบบฐานข้อมูลคลาวด์</p>
+        <div class="project-outcome">🎯 <strong>ผลลัพธ์:</strong> มอเตอร์ได้รับการตรวจสอบข้อมูลสดแบบ 24 ชม. ป้องกันความเสียหายในกระบวนการทำงานได้ล่วงหน้า</div>
       </div>
-      <span class="badge core">Core Skill</span>
     </div>
 
-    <div class="skill-card glass">
-      <div>
-        <div class="skill-header">
-          <div class="skill-icon">☁️</div>
-          <div class="skill-name">Firebase / Cloud IoT</div>
-        </div>
-        <div class="skill-desc">เชี่ยวชาญการใช้งาน Firebase Realtime Database (RTDB), ระบบยืนยันตัวตน Auth, จัดการโครงสร้าง JSON และตั้งค่า Database Rules</div>
+    <div class="glass-panel project-card">
+      <div class="project-img-placeholder">IMAGE PLACEHOLDER (SMART FEEDER)</div>
+      <div class="project-body">
+        <div class="project-role">บทบาท: Full-Stack IoT Developer</div>
+        <h3>Smart Pet Feeder System</h3>
+        <p>พัฒนาระบบให้อาหารสัตว์เลี้ยงอัตโนมัติ คอนโทรลเซอร์โวมอเตอร์จ่ายอาหาร และใช้เซ็นเซอร์อัลตราโซนิก (HC-SR04) ตรวจเช็คปริมาณอาหารที่เหลือ เชื่อมต่อฐานข้อมูล Firebase คอนโทรลระยะไกลได้</p>
+        <div class="project-outcome">🎯 <strong>ผลลัพธ์:</strong> ระบบเสถียร สามารถตัดจ่ายอาหารได้อย่างแม่นยำ และทำการแจ้งเตือนผู้ใช้งานเมื่ออาหารหมดถังได้ทันที</div>
       </div>
-      <span class="badge sub">Cloud & Data</span>
     </div>
 
-    <div class="skill-card glass">
-      <div>
-        <div class="skill-header">
-          <div class="skill-icon">🌐</div>
-          <div class="skill-name">WiFi Networking</div>
-        </div>
-        <div class="skill-desc">พัฒนาระบบการเชื่อมต่อ (Connect / Reconnect WiFi) บนบอร์ด ESP32 และการรับส่งข้อมูลผ่านโปรโตคอลความปลอดภัย HTTPS</div>
+    <div class="glass-panel project-card">
+      <div class="project-img-placeholder">IMAGE PLACEHOLDER (SIGNAL VISUALIZER)</div>
+      <div class="project-body">
+        <div class="project-role">บทบาท: Software Developer (Academic Project)</div>
+        <h3>Digital Modulation & Line Coding Sandbox</h3>
+        <p>สร้างโมเดลจำลองตัวชี้วัดและคำนวณกราฟสัญญาณของกระบวนการเข้ารหัสสัญญาณ เช่น Manchester, RZ และการมอดูเลตจำพวก ASK, FSK, PSK เพื่อใช้ในการเรียนการศึกษาทางเทคนิค</p>
+        <div class="project-outcome">🎯 <strong>ผลลัพธ์:</strong> ช่วยจำลองคลื่นสัญญาณและลดระยะเวลาการคำนวณทางทฤษฎีในห้องปฏิบัติการคอมพิวเตอร์ได้อย่างมีประสิทธิภาพ</div>
       </div>
-      <span class="badge sub">Network</span>
     </div>
 
-    <div class="skill-card glass">
-      <div>
-        <div class="skill-header">
-          <div class="skill-icon">🛠️</div>
-          <div class="skill-name">Debugging System</div>
-        </div>
-        <div class="skill-desc">วิเคราะห์ปัญหาผ่าน Serial Monitor, ค้นหาแอดเดรสด้วย I2C Scanner และมีความสามารถในการแยกแยะปัญหาระหว่าง HW vs SW</div>
-      </div>
-      <span class="badge sub">Analysis</span>
-    </div>
-  </div>
-
-  <div class="eyebrow" style="margin-top: 50px;">Soft Skills</div>
-  <h3 style="font-size: 22px; font-weight: 700; margin-bottom: 15px;">ทักษะการทำงานร่วมกับผู้อื่น</h3>
-  <div class="soft-skills-container">
-    <div class="soft-tag">🤝 Teamwork / Collaboration</div>
-    <div class="soft-tag">❤️ Empathy</div>
-    <div class="soft-tag">⏳ Time Management</div>
-    <div class="soft-tag">🎯 Prioritization</div>
-    <div class="soft-tag">⚡ Working Under Pressure</div>
-    <div class="soft-tag">🧩 Adaptability / Flexibility</div>
-    <div class="soft-tag">✨ Positive Attitude</div>
-    <div class="soft-tag">💡 Creativity</div>
-    <div class="soft-tag">📚 Continuous Learning</div>
-    <div class="soft-tag">💬 Communication</div>
   </div>
 </section>
 
-<section id="projects">
-  <div class="eyebrow">Featured Project</div>
-  <h2 class="title">ระบบตรวจสอบสุขภาพมอเตอร์ (Motor Health Monitoring System)</h2>
-  <div class="proj-grid">
-    <div class="proj-card glass">
-      <div class="proj-thumb">
-        <div class="main-t">Firmware & Sensor Array</div>
-        <div class="sub-t">Hardware Architecture</div>
+<section id="certificates">
+  <div class="section-eyebrow">06 / Credentials</div>
+  <h2 class="section-title">เกียรติบัตร & ใบรับรอง</h2>
+  <div class="cert-grid">
+    <div class="glass-panel cert-card">
+      <div class="cert-icon">📜</div>
+      <div class="cert-info">
+        <h4>Industrial Internet of Things (IIoT) Certificate</h4>
+        <p>ออกโดย: สถาบันการศึกษา / คณะเทคโนโลยีอุตสาหกรรม</p>
       </div>
-      <div class="proj-body">
-        <h3>ระบบตรวจวัดและประมวลผล</h3>
-        <p>พัฒนาระบบตรวจสอบสุขภาพมอเตอร์แบบ Real-time โดยใช้ ESP32 เป็นหน่วยประมวลผลหลัก ทำการเชื่อมต่อเข้ากับเซ็นเซอร์วัดค่าระดับอุตสาหกรรม ได้แก่ เซ็นเซอร์ Hall, DS18B20, ACS712 และ ADXL345</p>
-        <div class="proj-tags"><span class="tag">ESP32</span><span class="tag">C++</span><span class="tag">Sensors</span><span class="tag">I2C / OneWire</span></div>
-      </div>
-      <div class="proj-cta">ดูโครงสร้างสถาปัตยกรรมฮาร์ดแวร์</div>
     </div>
-    
-    <div class="proj-card glass">
-      <div class="proj-thumb" style="background:linear-gradient(160deg, rgba(191,90,242,0.15), rgba(10,132,255,0.05));">
-        <div class="main-t">Firebase Realtime DB</div>
-        <div class="sub-t">Cloud & Telemetry Data</div>
+    <div class="glass-panel cert-card">
+      <div class="cert-icon">🏆</div>
+      <div class="cert-info">
+        <h4>รางวัลเข้าร่วมการแข่งขันทักษะวิชาการ</h4>
+        <p>ได้รับจาก: โครงการเครือข่ายวิศวกรรมคอมพิวเตอร์ระดับอุดมศึกษา</p>
       </div>
-      <div class="proj-body">
-        <h3>ระบบส่งข้อมูลและคลาวด์</h3>
-        <p>ออกแบบอัลกอริทึมจัดการข้อมูลโทรมาตร ทำการวัดและแปลงค่าเพื่อส่งข้อมูลความเร็วรอบ (RPM), อุณหภูมิ, กระแสไฟฟ้า และค่าความสั่นสะเทือน ขึ้นระบบคลาวด์ Firebase RTDB แบบ Real-time</p>
-        <div class="proj-tags"><span class="tag">Firebase RTDB</span><span class="tag">JSON</span><span class="tag">HTTPS</span><span class="tag">Data Stream</span></div>
-      </div>
-      <div class="proj-cta">ดูโครงสร้าง Database Rules</div>
     </div>
-
-    <div class="proj-card glass">
-      <div class="proj-thumb" style="background:linear-gradient(160deg, rgba(52,199,89,0.15), rgba(10,132,255,0.05));">
-        <div class="main-t">Dashboard & Smart Alert</div>
-        <div class="sub-t">System Optimization</div>
-      </div>
-      <div class="proj-body">
-        <h3>การแจ้งเตือนและการสตรีม</h3>
-        <p>สร้างระบบแจ้งเตือนทันทีเมื่อตรวจพบค่าที่ผิดปกติ พร้อมส่งข้อมูลเข้า Dashboard เพื่อแบ่งระดับสถานะการทำงาน (ปกติ / เสี่ยงเสียหาย / ต้องซ่อมบำรุง) และออกแบบ Firmware ให้ทำงานเสถียร ไม่ค้างแม้เซ็นเซอร์หลุด</p>
-        <div class="proj-tags"><span class="tag">Dashboard</span><span class="tag">Alert System</span><span class="tag">Fail-Safe Firmware</span></div>
-      </div>
-      <div class="proj-cta">ดูรายละเอียดการออกแบบ Firmware</div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="eyebrow">Contact</div>
-  <h2 class="title">ช่องทางการติดต่อ</h2>
-  <p style="color:var(--ink-dim); margin:-20px 0 30px;">หากต้องการติดต่อสอบถามข้อมูลเพิ่มเติม ปรึกษาโปรเจกต์ หรือสนใจร่วมงาน สามารถติดต่อผมได้ตามช่องทางนี้ครับ</p>
-  <div class="contact-grid">
-    <a href="mailto:thanapun776@gmail.com" class="contact-card glass">
-      <div class="contact-icon">✉</div>
-      <div class="label">Email</div>
-      <div class="value">thanapun776@gmail.com</div>
-    </a>
-    <a href="tel:0805006334" class="contact-card glass">
-      <div class="contact-icon">☎</div>
-      <div class="label">Phone</div>
-      <div class="value">080-500-6334</div>
-    </a>
-    <a href="https://github.com/godji-jy" target="_blank" class="contact-card glass">
-      <div class="contact-icon">🐙</div>
-      <div class="label">GitHub</div>
-      <div class="value">github.com/godji-jy</div>
-    </a>
-    <div class="contact-card glass">
-      <div class="contact-icon">📱</div>
-      <div class="label">Social Media</div>
-      <div class="value" style="font-size: 11px; line-height: 1.4;">
-        FB: godji-jy<br>
-        IG: godji_03x
+    <div class="glass-panel cert-card">
+      <div class="cert-icon">🎖️</div>
+      <div class="cert-info">
+        <h4>ทุนการศึกษา / ใบประกาศเกียรติคุณกิจกรรมดีเด่น</h4>
+        <p>ออกโดย: มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
       </div>
     </div>
   </div>
 </section>
 
-<footer>© 2026 Thanapun Chomjun — Built with Liquid Glass UI</footer>
-
-<script>
-  document.querySelectorAll('.glass').forEach(card=>{
-    card.addEventListener('mousemove', e=>{
-      const r = card.getBoundingClientRect();
-      const x = ((e.clientX - r.left)/r.width)*100;
-      const y = ((e.clientY - r.top)/r.height)*100;
-      card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(255,255,255,0.22), var(--glass-fill) 60%)`;
-    });
-    card.addEventListener('mouseleave', ()=>{ card.style.background = 'var(--glass-fill)'; });
-  });
-</script>
+<footer>
+  <p>© 2026 Thanapun Chomjun — Computer Engineering Student Portfolio</p>
+</footer>
 
 </body>
 </html>
