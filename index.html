@@ -146,9 +146,20 @@
   .project-outcome strong { color: var(--accent-cyan); }
 
   /* 7. เกียรติบัตรและใบรับรอง (Certificates) */
-  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .cert-card { display: flex; gap: 16px; align-items: center; padding: 20px; background: rgba(255,255,255,0.01); }
-  .cert-icon { font-size: 28px; color: var(--accent-cyan); filter: drop-shadow(0 0 8px rgba(0,242,254,0.3)); }
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+  .cert-card { display: flex; gap: 18px; align-items: center; padding: 20px; background: rgba(255,255,255,0.01); }
+  
+  /* เพิ่มคลาสสไตล์สำหรับรูปภาพใบประกาศ */
+  .cert-img { 
+    width: 90px; 
+    height: 65px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    border: 1px solid var(--panel-border);
+    background: rgba(255,255,255,0.02);
+    flex-shrink: 0;
+  }
+  
   .cert-info h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
   .cert-info p { font-size: 12px; color: var(--text-muted); }
 
@@ -337,27 +348,23 @@
   <div class="section-eyebrow">06 / Credentials</div>
   <h2 class="section-title">เกียรติบัตร & ใบรับรอง</h2>
   <div class="cert-grid">
+    
     <div class="glass-panel cert-card">
-      <div class="cert-icon">📜</div>
+      <img src="as2.png" class="cert-img" alt="IIoT Certificate">
       <div class="cert-info">
-        <h4>Industrial Internet of Things (IIoT) Certificate</h4>
-        <p>ออกโดย: สถาบันการศึกษา / คณะเทคโนโลยีอุตสาหกรรม</p>
+        <h4>Python Essentials 1</h4>
+        
       </div>
     </div>
+    
     <div class="glass-panel cert-card">
-      <div class="cert-icon">🏆</div>
+      <img src="as2.png" class="cert-img" alt="Academic Award Certificate">
       <div class="cert-info">
         <h4>รางวัลเข้าร่วมการแข่งขันทักษะวิชาการ</h4>
-        <p>ได้รับจาก: โครงการเครือข่ายวิศวกรรมคอมพิวเตอร์ระดับอุดมศึกษา</p>
+       
       </div>
     </div>
-    <div class="glass-panel cert-card">
-      <div class="cert-icon">🎖️</div>
-      <div class="cert-info">
-        <h4>ทุนการศึกษา / ใบประกาศเกียรติคุณกิจกรรมดีเด่น</h4>
-        <p>ออกโดย: มหาวิทยาลัยราชภัฏพิบูลสงคราม</p>
-      </div>
-    </div>
+
   </div>
 </section>
 
