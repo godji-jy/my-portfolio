@@ -48,15 +48,21 @@ section{padding:6rem 2rem 4rem;max-width:1100px;margin:0 auto}
 .tags{display:flex;gap:.5rem;flex-wrap:wrap}
 .tag{font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:.3rem .7rem;background:rgba(192,98,47,.12);color:var(--accent);border-radius:20px}
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
-.project-card{border-left:4px solid var(--accent);transition:transform .3s}
+.project-card{border-left:4px solid var(--accent);transition:transform .3s;display:flex;flex-direction:column}
 .project-card:hover{transform:translateY(-4px)}
+.project-card-wide{grid-column:1/-1}
 .project-label{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--accent)}
 .project-card h3{font-size:1.2rem;margin:.3rem 0}
 .role{font-size:.85rem;opacity:.75;margin-bottom:.8rem}
 .project-card p{font-size:.9rem;margin-bottom:.8rem}
+.project-card ul{margin:0 0 .8rem 1.1rem;list-style:disc;font-size:.9rem}
+.project-card li{margin-bottom:.25rem}
 .result{border-top:1px solid var(--line);padding-top:.8rem}
-.link{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.8rem;display:inline-block;margin-top:.5rem}
+.link{color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:.8rem;display:inline-block}
 .link:hover{text-decoration:underline}
+.actions{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:auto;padding-top:1rem}
+.tags + .actions{margin-top:auto}
+.link.disabled{opacity:.45;cursor:default;pointer-events:none;text-decoration:none}
 .certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
 .cert-card{padding:0;overflow:hidden;border-left:4px solid var(--accent)}
 .cert-card img{width:100%;height:200px;object-fit:cover}
@@ -147,6 +153,9 @@ footer{text-align:center;padding:2rem;font-size:.8rem;opacity:.7}
       <p>ออกแบบกล่อง IoT ขนาดเล็กประมวลผลด้วย ESP32 เพื่อดึงค่าความสั่นสะเทือน อุณหภูมิ และความเร็วรอบ (RPM) ผ่านโปรโตคอล I2C และ OneWire ส่งขึ้นระบบฐานข้อมูลคลาวด์</p>
       <p class="result">🎯 <b>ผลลัพธ์:</b> มอเตอร์ได้รับการตรวจสอบข้อมูลสดแบบ 24 ชม. ป้องกันความเสียหายในกระบวนการทำงานได้ล่วงหน้า</p>
       <div class="tags"><span class="tag">ESP32</span><span class="tag">I2C</span><span class="tag">OneWire</span><span class="tag">Firebase</span></div>
+      <div class="actions">
+        <a class="link" data-project="motor" data-label="ดูอินโฟกราฟิกการทำงาน">ดูอินโฟกราฟิกการทำงาน</a>
+      </div>
     </article>
     <article class="project-card">
       <span class="project-label">(SMART SYSTEM)</span>
@@ -155,87 +164,45 @@ footer{text-align:center;padding:2rem;font-size:.8rem;opacity:.7}
       <p>ระบบเครื่องให้อาหารแมวอัจฉริยะ ควบคุมกลไกจ่ายอาหารด้วยเซอร์โวมอเตอร์ และใช้เซ็นเซอร์อัลตราโซนิก (HC-SR04) ตรวจเช็คปริมาณอาหารคงเหลือ เชื่อมต่อ Firebase Realtime Database เพื่อควบคุมและมอนิเตอร์ระยะไกลผ่านหน้าเว็บ Dashboard แบบเรียลไทม์</p>
       <p class="result">🎯 <b>ผลลัพธ์:</b> ระบบเสถียร จ่ายอาหารได้แม่นยำ และแจ้งเตือนผู้ใช้บนหน้าเว็บทันทีเมื่ออาหารต่ำกว่า 20%</p>
       <div class="tags"><span class="tag">ESP32</span><span class="tag">Servo</span><span class="tag">HC-SR04</span><span class="tag">Firebase</span></div>
+      <div class="actions">
+        <a class="link" data-project="petfeeder" data-label="ดูอินโฟกราฟิกการทำงาน">ดูอินโฟกราฟิกการทำงาน</a>
+      </div>
     </article>
     <article class="project-card">
-      <span class="project-label">(SIGNAL VISUALIZER)</span>
+      <span class="project-label">(WEB GAME)</span>
       <h3>Roman Match Master</h3>
       <p class="role">บทบาท: Software Developer (Academic Project)</p>
       <p>🏛️ เกมทดสอบความจำจับคู่ตัวเลขโรมันและอารบิก ดีไซน์การ์ดพลิก 3D เล่นบนเว็บได้ทันที รองรับทุกหน้าจอรวมถึงมือถือ พัฒนาด้วย HTML, CSS และ Vanilla JavaScript</p>
       <div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-      <a class="link" href="https://github.com/godji-jy" target="_blank" rel="noopener">ดูบน GitHub</a>
+      <div class="actions">
+        <a class="link" data-project="roman" data-label="เปิดดูผลงาน">เปิดดูผลงาน</a>
+        <a class="link" href="https://github.com/godji-jy" target="_blank" rel="noopener">ดูบน GitHub</a>
+      </div>
+    </article>
+    <article class="project-card project-card-wide">
+      <span class="project-label">(AI SYSTEM)</span>
+      <h3>Local AI Assistant</h3>
+      <p class="role">บทบาท: AI &amp; Software Developer (Personal Project)</p>
+      <p>แชตบอท AI ภาษาไทย/อังกฤษที่รันบนเครื่องตัวเองด้วย Ollama และ Gradio ข้อมูลอยู่ในเครื่อง ไม่ต้องส่งขึ้นคลาวด์ ให้ AI ตอบจากข้อมูลจริงแทนการเดา ด้วยความสามารถหลัก 3 อย่าง</p>
+      <ul>
+        <li><b>RAG ฐานความรู้ส่วนตัว:</b> ค้นหาจากไฟล์ PDF/TXT/MD ด้วย ChromaDB และโมเดล embedding (bge-m3) แล้วอ้างอิงชื่อไฟล์ท้ายคำตอบ</li>
+        <li><b>ค้นหาเว็บ:</b> ให้ AI สร้างคำค้นเอง เปิดอ่านหน้าเว็บจริง คัดเฉพาะส่วนที่ตรงกับคำถาม พร้อมลิงก์แหล่งที่มา</li>
+        <li><b>แนบไฟล์ในแชต:</b> รองรับ PDF, Word, CSV และไฟล์โค้ด ถ้าไฟล์ยาวจะเลือกเฉพาะส่วนที่เกี่ยวข้องให้อัตโนมัติ</li>
+      </ul>
+      <p class="result">🎯 <b>จุดเด่น:</b> ทำงานในเครื่องทั้งหมด ตอบแบบสตรีม มีโหมดคิดลึกสำหรับโจทย์ยาก และออกแบบหน้าจอเองทั้งหมด</p>
+      <div class="tags"><span class="tag">Python</span><span class="tag">Ollama</span><span class="tag">Gradio</span><span class="tag">ChromaDB</span><span class="tag">RAG</span></div>
+      <div class="actions">
+        <a class="link" data-project="ai" data-label="ดูอินโฟกราฟิกการทำงาน">ดูอินโฟกราฟิกการทำงาน</a>
+        <a class="link" href="https://github.com/godji-jy" target="_blank" rel="noopener">ดูบน GitHub</a>
+      </div>
     </article>
   </div>
 </section>
-<article class="project-card project-card-wide">
-  <span class="project-label">(AI SYSTEM)</span>
-
-  <h3>Local AI Assistant</h3>
-
-  <p class="role">
-    บทบาท: AI &amp; Software Developer (Personal Project)
-  </p>
-
-  <p>
-    พัฒนาแชตบอท AI ภาษาไทยและภาษาอังกฤษที่สามารถทำงานบนเครื่องคอมพิวเตอร์ส่วนตัว
-    โดยใช้ Ollama และ Gradio เน้นความเป็นส่วนตัวของข้อมูล
-    และสามารถประมวลผลด้วยโมเดล AI ภายในเครื่องโดยไม่ต้องพึ่งพา External API
-  </p>
-
-  <ul>
-    <li>
-      <b>RAG ฐานความรู้ส่วนตัว:</b>
-      ค้นหาและดึงข้อมูลจากไฟล์ PDF, TXT และ MD ด้วย ChromaDB
-      และโมเดล Embedding (bge-m3) พร้อมแสดงแหล่งอ้างอิง
-    </li>
-
-    <li>
-      <b>Web Search:</b>
-      สามารถค้นหาข้อมูลจากเว็บไซต์ อ่านเนื้อหา
-      และคัดเลือกข้อมูลที่เกี่ยวข้องกับคำถาม พร้อมแสดงลิงก์แหล่งที่มา
-    </li>
-
-    <li>
-      <b>File Processing:</b>
-      รองรับการแนบไฟล์ PDF, Word, CSV และไฟล์ Source Code
-      เพื่อให้ AI วิเคราะห์และค้นหาข้อมูลภายในไฟล์ได้
-    </li>
-
-    <li>
-      <b>AI Response:</b>
-      รองรับการตอบกลับแบบ Streaming
-      และโหมดประมวลผลเชิงลึกสำหรับคำถามที่ซับซ้อน
-    </li>
-  </ul>
-
-  <p class="result">
-    🎯 <b>จุดเด่น:</b>
-    พัฒนาระบบ AI ที่ทำงานภายในเครื่อง
-    ผสานเทคโนโลยี RAG, Vector Database และ Local LLM
-    เพื่อช่วยค้นหา วิเคราะห์ และตอบคำถามจากข้อมูลที่ผู้ใช้กำหนด
-  </p>
-
-  <div class="tags">
-    <span class="tag">Python</span>
-    <span class="tag">Ollama</span>
-    <span class="tag">Gradio</span>
-    <span class="tag">ChromaDB</span>
-    <span class="tag">RAG</span>
-    <span class="tag">bge-m3</span>
-    <span class="tag">Local LLM</span>
-  </div>
-
-  <a class="link"
-     href="https://github.com/godji-jy"
-     target="_blank"
-     rel="noopener">
-    ดูบน GitHub
-  </a>
-</article>
 
 <section id="certificates">
   <div class="section-header"><span class="section-tag">05 / CREDENTIALS</span><h2 class="section-title">เกียรติบัตรและใบรับรอง</h2></div>
   <div class="certs-grid">
-    <div class="cert-card"><img src="as2.png" alt="ใบรับรอง Python Essentials 1"><h4>Python Essentials 1</h4></div>
+    <div class="cert-card"><img src="Screenshot 2026-10-31 022132.png" alt="ใบรับรอง Python Essentials 1"><h4>Python Essentials 1</h4></div>
   </div>
 </section>
 
@@ -255,6 +222,33 @@ footer{text-align:center;padding:2rem;font-size:.8rem;opacity:.7}
 <footer>© 2026 Thanapun Chomjun — Computer Engineering Student Portfolio</footer>
 
 <script>
+// =====================================================
+// ช่องใส่ลิงก์โปรเจกต์ (ใส่ URL ในเครื่องหมายคำพูดได้เลย)
+// ว่างไว้ = ปุ่มจะขึ้นสีจางว่า "เร็ว ๆ นี้" และกดไม่ได้
+// ใส่ลิงก์แล้ว = ปุ่มเปิดแท็บใหม่ทันที
+// =====================================================
+const PROJECT_LINKS = {
+  motor: "https://godji-jy.github.io/motor/",   // อินโฟกราฟิกมอเตอร์
+  petfeeder: "",   // ระบบให้อาหารแมว
+  roman: "",       // เกม Roman Match Master
+  ai: ""           // Local AI Assistant
+};
+
+document.querySelectorAll('a[data-project]').forEach(a=>{
+  const url=(PROJECT_LINKS[a.dataset.project]||"").trim();
+  const label=a.dataset.label;
+  if(url){
+    a.href=url;
+    a.target="_blank";
+    a.rel="noopener";
+    a.textContent=label;
+  }else{
+    a.classList.add('disabled');
+    a.setAttribute('aria-disabled','true');
+    a.textContent=label+" (เร็ว ๆ นี้)";
+  }
+});
+
 const root=document.documentElement,toggle=document.getElementById('theme-toggle');
 function setTheme(t){
   if(t==='dark'){root.setAttribute('data-theme','dark');toggle.textContent='☀️'}
